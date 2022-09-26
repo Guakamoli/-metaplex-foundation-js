@@ -194,10 +194,10 @@ export class BundlrStorageDriver implements StorageDriver {
 
     const identity: Signer =
       this._options.identity ?? this._metaplex.identity();
-    const bundlr = isKeypairSigner(identity)
-      ? this.initNodeBundlr(address, currency, identity, options)
-      : await this.initWebBundlr(address, currency, identity, options);
-
+    // const bundlr = !isKeypairSigner(identity)
+    //   ? this.initNodeBundlr(address, currency, identity, options)
+    //   : await this.initWebBundlr(address, currency, identity, options);
+    const bundlr =  await this.initWebBundlr(address, currency, identity as IdentitySigner, options);
     try {
       // Check for valid bundlr node.
       await bundlr.utils.getBundlerAddress(currency);
